@@ -1,0 +1,18 @@
+title: Success Reponse
+type: object
+description: Success response with message property.
+x-tags:
+  - Common
+properties:
+  status:
+    type: string
+  message:
+    type: string
+required:
+  - status
+  - message
+x-examples:
+  example-1: 
+    status: 200,
+    message: 'Success'
+

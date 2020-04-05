@@ -1,0 +1,24 @@
+title: subjects-average.v1
+type: object
+properties:
+  id:
+    type: string
+  subjectName:
+    type: string
+  details:
+    type: array
+    items:
+      type: object
+      properties:
+        gradeName:
+          type: number
+        good:
+          type: number
+        medium:
+          type: number
+        week:
+          type: number
+  grade:
+    type: string
+  schoolYear:
+    type: string

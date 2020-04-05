@@ -1,0 +1,14 @@
+- name: limit
+  in: query
+  description: How many items to return at one time (default 20)
+  required: false
+  schema:
+    type: number
+    format: int32
+- name: page
+  in: query
+  description: The page number of items returned
+  required: false
+  schema:
+    type: number
+    format: int32

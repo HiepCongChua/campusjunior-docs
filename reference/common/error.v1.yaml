@@ -1,0 +1,18 @@
+title: Unauthorized Error
+type: object
+description: A standard error object.
+x-tags:
+  - Common
+properties:
+  status:
+    type: string
+  message:
+    type: string
+required:
+  - status
+  - message
+x-examples:
+  example-1: 
+    status: 401,
+    message: 'Unauthorized'
+

@@ -1,0 +1,51 @@
+title: school-news.v1
+type: object
+description: ''
+properties:
+  id:
+    type: string
+  topic:
+    type: string
+  description:
+    type: string
+  content:
+    type: string
+  tags:
+    type: object
+    properties:
+      tagId:
+        type: integer
+      tagName:
+        type: string
+  createdAt:
+    type: string
+  updatedAt:
+    type: string
+  authorId:
+    type: string
+  userVerifyId:
+    type: string
+  comments:
+    type: array
+    items:
+      type:
+        - object
+        - 'null'
+      properties:
+        parentId:
+          type:
+            - string
+            - 'null'
+        content:
+          type: string
+        createdAt:
+          type: integer
+        updated:
+          type: integer
+  status:
+    type: string
+    default: draf
+    enum:
+      - draf
+      - pending
+      - published

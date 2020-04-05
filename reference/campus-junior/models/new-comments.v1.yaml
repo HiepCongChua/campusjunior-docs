@@ -1,0 +1,17 @@
+title: new-comments.v1
+type: object
+properties:
+  id:
+    type: integer
+  newId:
+    type: integer
+  parentId:
+    type:
+      - integer
+      - 'null'
+  content:
+    type: string
+  createdAt:
+    type: integer
+  updatedAt:
+    type: integer

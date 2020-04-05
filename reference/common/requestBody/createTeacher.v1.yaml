@@ -1,0 +1,75 @@
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - username
+        - roles
+        - firstName
+        - lastName
+        - createdAt
+        - dOb
+        - phoneNumber
+      properties:
+        username:
+          type: string
+          example: hongquang
+        firstName:
+          type: string
+          example: Quang
+        middleName:
+          type: string
+          example: Hong
+        lastName:
+          type: string
+          example: Dang
+        photoUrls:
+          type: string
+        dOB:
+          type: number
+        roles:
+          type: string
+          example: teacher
+        seniority:
+          type: number
+          example: 10
+        address:
+          type: string
+          example: Duong Tran Phu - Ha Dong - Ha Noi
+        phoneNumber:
+          type: number
+        classes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+              className:
+                type: string
+                example: 7A
+        isHomeroomTeacher:
+          type: boolean
+          enum:
+            - true
+            - false
+        isOfficial:
+          type: boolean
+          enum:
+            - true
+            - false
+        workingProcessed:
+          type: array
+          items:
+            type: object
+            properties:
+              stage:
+                type: string
+                example: 2010 - 2014
+              position:
+                type: string
+                example: assistant principals
+              achievements:
+                type: string
+                example: Good teachers at national level

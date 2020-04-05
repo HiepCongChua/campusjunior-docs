@@ -1,0 +1,13 @@
+title: subject-average.v1
+type: object
+properties:
+  gradeName:
+    type: string
+  good:
+    type: string
+  medium:
+    type: string
+  week:
+    type: string
+  schoolYear:
+    type: string

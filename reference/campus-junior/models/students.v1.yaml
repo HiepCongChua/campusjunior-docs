@@ -1,0 +1,103 @@
+title: Student
+type: object
+x-examples: {}
+xml:
+  name: Students
+x-tags:
+  - Students
+description: Generate infomation.
+properties:
+  id:
+    type: integer
+    format: int64
+  updatedAt:
+    type: number
+  createdAt:
+    type: number
+  phoneNumber:
+    type: number
+  address:
+    type: string
+    example: Duong Tran Phu - Ha Dong - Ha Noi
+  roles:
+    type: string
+    example: student
+  dOB:
+    type: number
+  photoUrls:
+    type: string
+  lastName:
+    type: string
+    example: Dang
+  middleName:
+    type: string
+    example: Hong
+  firstName:
+    type: string
+    example: Quang
+  username:
+    type: string
+    example: hongquang
+  grade:
+    type: string
+  className:
+    type: string
+  homeoomTeacher:
+    type: string
+  parantId:
+    $ref: ''
+  learningProcess:
+    type: array
+    items:
+      type: object
+      properties:
+        primary:
+          type: object
+          properties:
+            schoolName:
+              type: string
+            grade1:
+              type:
+                - object
+                - 'null'
+              properties:
+                conduct:
+                  type: string
+                learningPower:
+                  type: string
+                achievements:
+                  type: array
+                  items:
+                    type: string
+            grade2:
+              type:
+                - object
+                - 'null'
+            grade3:
+              type:
+                - object
+                - 'null'
+            grade4:
+              type:
+                - object
+                - 'null'
+            grade5:
+              type:teachers
+                - object
+                - 'null'
+        secondary:
+          type: object
+          description: like primary
+        highschool:
+          type: object
+          description: like primary
+required:
+  - createdAt
+  - phoneNumber
+  - roles
+  - lastName
+  - firstName
+  - username
+  - grade
+  - className
+  - homeoomTeacher

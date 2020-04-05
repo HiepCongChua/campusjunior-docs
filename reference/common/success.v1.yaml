@@ -1,0 +1,13 @@
+title: Success Response
+type: object
+description: A standard success response.
+x-tags:
+  - Common
+properties:
+  status:
+    type: string
+  data:
+    type: object
+required:
+  - status
+  - message
