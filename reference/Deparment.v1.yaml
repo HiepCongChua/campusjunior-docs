@@ -6,7 +6,7 @@ info:
 servers:
   - url: ' http://dev-api.campusjunior.com'
 paths:
-  '/department/{departmentId}':
+  /department/:
     get:
       summary: GET
       tags: []
@@ -27,7 +27,7 @@ paths:
                 ],
                 "metadata": "{ totalPage:1, pageSize:10, totalRecords:2}"
             }
-      operationId: get-department
+      operationId: get-list-department
       description: |
         Get list department
     post:
@@ -50,6 +50,8 @@ paths:
                 POS:
                   type: string
         description: ''
+    parameters: []
+  '/department/{departmentId}':
     put:
       summary: PUT
       operationId: put-department
@@ -57,9 +59,10 @@ paths:
         '200':
           description: |-
             {
-             "status":200,
-             "message":"Success"
+             status:200,
+             message:"Success"
             }
+      description: Update a department
       requestBody:
         content:
           application/json:
@@ -68,19 +71,23 @@ paths:
               properties:
                 name:
                   type: string
-        description: ''
     delete:
       summary: DELETE
       operationId: delete-department
       responses:
         '200':
-          description: OK
-      description: ''
+          description: |-
+            {
+             status:200,
+             message:"Success"
+            }
+      description: delete a department
     parameters:
       - schema:
-          type: string
+          type: integer
         name: departmentId
         in: path
+        required: true
 components:
   schemas:
     Department:

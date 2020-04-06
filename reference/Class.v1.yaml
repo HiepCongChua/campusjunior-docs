@@ -7,13 +7,14 @@ info:
 servers:
   - url: ' http://dev-api.campusjunior.com'
 paths:
-  '/class/{classId}':
+  /class/:
     get:
       summary: GET
       tags: []
       operationId: get list class
       description: |
         Get list class
+
         Mock URL
       parameters:
         - schema:
@@ -22,6 +23,7 @@ paths:
           name: limit
           description: |-
             Limit number of class
+
              on each page
         - schema:
             type: number
@@ -43,10 +45,14 @@ paths:
                   type: integer
                   description: |+
                     amount student
+
+
                 idTeacher:
                   type: string
                   description: |+
                     homeroom teacher id
+
+
                 ' gradeLevel':
                   type: integer
                   description: |
@@ -89,11 +95,7 @@ paths:
                 ],
                 "metadata": "{ totalPage:1, pageSize:10, totalRecords:2}"
             }
-    parameters:
-      - schema:
-          type: number
-        name: classId
-        in: path
+    parameters: []
     post:
       summary: POST
       operationId: post-class
@@ -134,6 +136,7 @@ paths:
                 - ' schoolYear'
             examples: {}
         description: ''
+  '/class/{classId}':
     put:
       summary: PUT
       operationId: put-class
@@ -144,7 +147,8 @@ paths:
              status:200,
              message:"Success"
             }
-      description: 'Update a class '
+      description: |
+        Update a class
       requestBody:
         content:
           application/json:
@@ -165,34 +169,25 @@ paths:
                 schoolYear:
                   type: array
                   items: {}
-            examples:
-              example-1:
-                value:
-                  name: 9A
-                  amount: 55
-                  idSchool: 5
-                  gradeLevel: 9
-                  idTeacher: 11
-                  schoolYear:
-                    - 2016
-                    - 2017
         description: ''
-      parameters:
-        - schema:
-            type: string
-          in: query
     delete:
       summary: DELETE
-      operationId: delete-class-classId
+      operationId: delete-class
       responses:
         '200':
           description: |-
             {
-            "status":200,
-            "message":"Success"
+             status:200,
+             message:"Success"
             }
-      description: Delete a class
-      requestBody: {}
+      description: |
+        Delete a class
+    parameters:
+      - schema:
+          type: integer
+        name: classId
+        in: path
+        required: true
 components:
   schemas:
     Class:
