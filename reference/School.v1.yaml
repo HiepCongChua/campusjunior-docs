@@ -1,0 +1,156 @@
+openapi: 3.0.0
+info:
+  title: School
+  version: '1.0'
+  description: CRUD School
+servers:
+  - url: 'http://dev-api.campusjunior.com'
+paths:
+  '/schools/{schoolId}':
+    get:
+      summary: GET
+      tags: []
+      responses:
+        '200':
+          description: |-
+            {
+                "status": 200,
+                "data": [
+                    {
+                    "id":1,
+                     "name":"Thuan Thanh I",
+                     "amount":2000,
+                     "gradeLevel":2
+                    },
+                     {
+                     "id":2,
+                    "name":"Thuan Thanh II",
+                     "amount":1700,
+                   "gradeLevel":2
+                    }
+                ],
+                "metadata": "{ totalPage:1, pageSize:10, totalRecords:2}"
+            }
+      operationId: get-schools
+      description: List schools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                idDepartment:
+                  type: integer
+                studyLevel:
+                  type: integer
+                amount:
+                  type: integer
+        description: ''
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: limit
+          description: ''
+        - schema:
+            type: number
+          in: query
+          name: page
+    parameters:
+      - schema:
+          type: string
+        name: schoolId
+        in: path
+    post:
+      summary: POST
+      operationId: post-school
+      responses:
+        '200':
+          description: |-
+            {
+            "status":200,
+            "message":"Success"
+            }
+      description: Create school
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                amount:
+                  type: integer
+                studyLevel:
+                  type: integer
+                idDepartment:
+                  type: integer
+              required:
+                - name
+                - amount
+                - studyLevel
+                - idDepartment
+    put:
+      summary: PUT
+      operationId: put-schools-schoolId
+      responses:
+        '200':
+          description: |-
+            {
+             "status":200,
+             "message":"Success"
+            }
+      description: |
+        Update info school
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PUT:
+                  type: string
+                studyLevel:
+                  type: integer
+                idDepartment:
+                  type: integer
+                amount:
+                  type: integer
+    delete:
+      summary: DELETE
+      operationId: delete-schools-schoolId
+      responses:
+        '200':
+          description: |-
+            {
+             "status":200,
+             "message":"Success"
+            }
+      description: Delete school
+components:
+  schemas:
+    School:
+      title: School
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        studyLevel:
+          type: integer
+          description: |
+            School level of school
+        idDepartment:
+          type: integer
+          description: |
+            Department of school
+        amount:
+          type: integer
+  securitySchemes:
+    Bearer accessToken:
+      type: http
+      scheme: bearer

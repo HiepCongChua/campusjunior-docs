@@ -1,0 +1,235 @@
+openapi: 3.0.0
+info:
+  title: Class
+  version: '1.0'
+  description: |
+    CRUD Class
+servers:
+  - url: ' http://dev-api.campusjunior.com'
+paths:
+  '/class/{classId}':
+    get:
+      summary: GET
+      tags: []
+      operationId: get list class
+      description: |
+        Get list class
+        Mock URL
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: limit
+          description: |-
+            Limit number of class
+             on each page
+        - schema:
+            type: number
+          in: query
+          name: page
+          description: |
+            Page to get list class
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idSchool:
+                  type: string
+                  description: |
+                    id of the school
+                amount:
+                  type: integer
+                  description: |+
+                    amount student
+                idTeacher:
+                  type: string
+                  description: |+
+                    homeroom teacher id
+                ' gradeLevel':
+                  type: integer
+                  description: |
+                    grade level
+                schoolYear:
+                  description: |
+                    class name
+                  type: array
+                  items: {}
+                name:
+                  type: string
+                  description: |
+                    class name
+            examples: {}
+        description: ''
+      responses:
+        '200':
+          description: |-
+            {
+                "status": 200,
+                "data": [
+                    {
+                     "name":"9A",
+                     "amount":55,
+                     "idClass":1,
+                     "idSchool":5,
+                     "gradeLevel":9,
+                     "idTeacher":11,
+                     "schoolYear":[2016,2017]
+                    },
+                     {
+                     "name":"9B",
+                     "amount":42,
+                     "idClass":2,
+                     "idSchool":5,
+                     "gradeLevel":9,
+                     "idTeacher":11,
+                      "schoolYear":[2017,2018]
+                    }
+                ],
+                "metadata": "{ totalPage:1, pageSize:10, totalRecords:2}"
+            }
+    parameters:
+      - schema:
+          type: number
+        name: classId
+        in: path
+    post:
+      summary: POST
+      operationId: post-class
+      responses:
+        '200':
+          description: |-
+            {
+             status:200,
+             message:"Success"
+            }
+          headers: {}
+      description: Create a class
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idSchool:
+                  type: string
+                idDepartment:
+                  type: string
+                amount:
+                  type: number
+                idTeacher:
+                  type: string
+                gradeLevel:
+                  type: string
+                ' schoolYear':
+                  type: array
+                  items: {}
+              required:
+                - idSchool
+                - idDepartment
+                - amount
+                - idTeacher
+                - gradeLevel
+                - ' schoolYear'
+            examples: {}
+        description: ''
+    put:
+      summary: PUT
+      operationId: put-class
+      responses:
+        '200':
+          description: |-
+            {
+             status:200,
+             message:"Success"
+            }
+      description: 'Update a class '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idSchool:
+                  type: string
+                  description: ''
+                amount:
+                  type: number
+                idTeacher:
+                  type: number
+                name:
+                  type: string
+                gradeLevel:
+                  type: number
+                schoolYear:
+                  type: array
+                  items: {}
+            examples:
+              example-1:
+                value:
+                  name: 9A
+                  amount: 55
+                  idSchool: 5
+                  gradeLevel: 9
+                  idTeacher: 11
+                  schoolYear:
+                    - 2016
+                    - 2017
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+    delete:
+      summary: DELETE
+      operationId: delete-class-classId
+      responses:
+        '200':
+          description: |-
+            {
+            "status":200,
+            "message":"Success"
+            }
+      description: Delete a class
+      requestBody: {}
+components:
+  schemas:
+    Class:
+      title: Class
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        idSchool:
+          type: integer
+        amount:
+          type: integer
+        gradeLevel:
+          type: integer
+        schoolYear:
+          type: array
+          items: {}
+        createdAt:
+          type: integer
+        updatedAt:
+          type: integer
+      required:
+        - id
+        - name
+        - idSchool
+        - amount
+        - gradeLevel
+        - schoolYear
+        - createdAt
+        - updatedAt
+  securitySchemes:
+    Bearer accessToken:
+      type: http
+      scheme: bearer
+      description: |
+        Bearer accessToken
+security:
+  - Bearer accessToken: []

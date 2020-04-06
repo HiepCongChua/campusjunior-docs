@@ -1,0 +1,17 @@
+title: message.v1
+type: object
+properties:
+  status:
+    type: string
+  data:
+    type: object
+    properties:
+      topic:
+        type: string
+      content:
+        type: string
+      creatorId:
+        type: integer
+      createdAt:
+        type: integer
+description: 'Message'

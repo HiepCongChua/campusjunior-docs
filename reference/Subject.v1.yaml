@@ -1,0 +1,190 @@
+openapi: 3.0.0
+info:
+  title:  Subject
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'http://dev-api.campusjunior.com'
+paths:
+  /subjects:
+    get:
+      summary: Get list subjects
+      tags:
+        - subjects
+      responses:
+        '200':
+          description: Array list of subjects
+          content:
+            application/json:
+              schema:
+                $ref: ./models/subjects.v1.yaml
+        '':
+          description: ''
+      operationId: get-subjects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: grade
+          description: Filter subjects by grade
+    post:
+      summary: ''
+      operationId: post-subjects
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: ./models/subjects.v1.yaml
+      description: ''
+      tags:
+        - subjects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/subjects.v1.yaml
+  '/subjects/{subjectId}':
+    parameters:
+      - schema:
+          type: string
+        name: subjectId
+        in: path
+        required: true
+    get:
+      summary: Get a specific subject
+      tags:
+        - subjects
+      responses:
+        '200':
+          description: Return the subject matched
+          content:
+            application/json:
+              schema:
+                $ref: ./models/subjects.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    status: 200
+                    data: {}
+      operationId: get-subjects-subjectId
+    put:
+      operationId: put-subjects-subjectId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/subjects.v1.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../common/error.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    status: 400
+                    messasge: Not found subject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/subjects.v1.yaml
+      description: Update a subject
+      tags:
+        - subjects
+    delete:
+      operationId: delete-subjects-subjectId
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: ../common/successMess.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    status: 200
+                    mesesage: Delete success
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../common/error.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    status: 200
+                    message: Not found subject
+      description: Delete a subject
+      tags:
+        - subjects
+  /subjects/mark-average:
+    parameters: []
+    get:
+      summary: Get specific mark average of a subject
+      tags:
+        - subject-average
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/subjects-average.v1.yaml
+      description: ''
+      parameters:
+        - schema:
+            type: string
+            default: This school year
+          in: query
+          name: schoolYear
+      requestBody: {}
+      operationId: get-subjects-subject-id-mark-average
+  '/subjects/{subjectId}/markAverages':
+    parameters:
+      - schema:
+          type: string
+        name: subjectId
+        in: path
+        required: true
+    get:
+      summary: Get mark average of a subject
+      tags:
+        - subject-average
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/subject-average.v1.yaml
+      operationId: get-subject-subject-id-mark-average
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: schoolYear
+components:
+  schemas:
+    Subjects:
+      description: A list of subjects.
+      title: Subjects
+      x-tags:
+        - Subjects
+      items:
+        $ref: ./campus-junior/models/subjects.v1.yaml
+      type: array
+  securitySchemes:
+    Bearer accessToken:
+      type: http
+      scheme: bearer
+security:
+  - Bearer accessToken: []

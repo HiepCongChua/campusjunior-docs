@@ -1,0 +1,268 @@
+openapi: 3.0.0
+info:
+  title: Teachers
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'http://dev-api.campusjunior.com'
+paths:
+  /teachers:
+    get:
+      operationId: listTeachers
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: limit
+          default: 25
+          description: Limit number of teachers on each page
+        - schema:
+            type: string
+          in: query
+          name: roles
+          description: List of users have the same role
+        - schema:
+            type: string
+          in: query
+          name: page
+      responses:
+        '200':
+          description: A paged array of teachers
+          content:
+            application/json:
+              schema:
+                $ref: ./models/teachers.v1.yaml
+              examples:
+                response:
+                  value:
+                    status: 200
+                    data:
+                      - {}
+                    metadata: '{ totalPage, pageSize, totalRecords}'
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+      description: List all teachers
+      tags:
+        - teachers
+      requestBody: {}
+    post:
+      operationId: createTeacher
+      responses:
+        '200':
+          description: A object teacher was created
+          content:
+            application/json:
+              schema:
+                $ref: ./models/teachers.v1.yaml
+              examples:
+                res:
+                  value:
+                    status: 200
+                    data: {}
+      description: Create teacher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/teachers.v1.yaml
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties: {}
+          application/xml:
+            schema:
+              type: object
+        $ref: ../common/requestBody/createTeacher.v1.yaml
+      tags:
+        - teachers
+  '/teachers/{teacherId}':
+    get:
+      summary: Info for a specific teacher
+      operationId: getTeacherById
+      tags:
+        - teachers
+      parameters:
+        - name: teacherId
+          in: path
+          required: true
+          description: The id of the teacher to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: ./models/teachers.v1.yaml
+              examples:
+                example-1: {}
+        '400':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../common/error.v1.yaml
+    delete:
+      tags:
+        - teachers
+      description: Delete a teacher
+      openrationId: deleteTeacher
+      requestBody: null
+      responses:
+        '200':
+          description: Delete success
+          content:
+            application/json:
+              schema:
+                $ref: ../common/successMess.v1.yaml
+              examples: {}
+        '404':
+          description: Not found user
+          content:
+            application/json:
+              schema:
+                $ref: ../common/error.v1.yaml
+      parameters:
+        - name: teacherId
+          in: path
+          required: true
+          description: The id of the teacher to retrieve
+          schema:
+            type: string
+    put:
+      tags:
+        - teachers
+      description: Update a teacher
+      openrationId: updateTeacher
+      requestBody:
+        $ref: ../common/requestBody/createTeacher.v1.yaml
+      responses:
+        '200':
+          description: A object teacher was just updated
+          content:
+            application/json:
+              schema:
+                $ref: ./models/teachers.v1.yaml
+        '400':
+          description: Not found user
+          content:
+            application/json:
+              schema:
+                $ref: ../common/error.v1.yaml
+      parameters:
+        - name: teacherId
+          in: path
+          required: true
+          description: The id of the teacher to retrieve
+          schema:
+            type: string
+    parameters:
+      - schema:
+          type: string
+        name: teacherId
+        in: path
+        required: true
+  /notifs/teachers:
+    post:
+      tags:
+        - teachers
+      summary: Notify to many teachers
+      operationId: post-notifs-teachers
+      responses:
+        '200':
+          description: Send message success
+          content:
+            application/json:
+              schema:
+                $ref: ./models/message.v1.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: |
+                Array of teacher id to receive message
+              type: object
+              properties:
+                topic:
+                  type: string
+                message:
+                  type: string
+                teacherIds:
+                  type: array
+                  items:
+                    type: number
+              required:
+                - topic
+                - message
+                - teacherIds
+            examples:
+              example request body:
+                value:
+                  topic: Weekly meeting
+                  message: Weekly meeting at ... when ... where ...
+                  teacherIds:
+                    - 1
+                    - 4
+                    - 5
+  '/notifs/{teacherId}':
+    parameters:
+      - schema:
+          type: string
+        name: teacherId
+        in: path
+        required: true
+    post:
+      tags:
+        - teachers
+      summary: Notify to a teacher
+      operationId: post-notifs-teacherId
+      description: Send messge to a teacher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                message:
+                  type: string
+            examples:
+              example request body:
+                value:
+                  topic: Weekly meeting
+                  message: Weekly meeting at ... when ... where ...
+        description: ''
+      responses:
+        '200':
+          description: Delete success
+          content:
+            application/json:
+              schema:
+                $ref: ./models/message.v1.yaml
+        '404':
+          description: Not found teacher
+          content:
+            application/json:
+              schema:
+                $ref: ../common/error.v1.yaml
+  
+components:
+  schemas:
+    Teachers:
+      type: array
+      items:
+        $ref: ./campus-junior/models/teachers.v1.yaml
+      x-tags:
+        - Teachers
+      title: Teachers
+      description: A list of teachers.
+  securitySchemes:
+    Bearer accessToken:
+      type: http
+      scheme: bearer
+security:
+  - Bearer accessToken: []

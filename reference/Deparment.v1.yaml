@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: Department
+  version: '1.0'
+  description: CRUD Department
+servers:
+  - url: ' http://dev-api.campusjunior.com'
+paths:
+  '/department/{departmentId}':
+    get:
+      summary: GET
+      tags: []
+      responses:
+        '200':
+          description: |-
+            {
+                "status": 200,
+                "data": [
+                    {
+                     "id":1,
+                     "name":"Phong giao duc huyen Thuan Thanh"
+                    },
+                     {
+                     "id":2,
+                     "name":"Phong giao duc huyen Luong Tai"
+                    }
+                ],
+                "metadata": "{ totalPage:1, pageSize:10, totalRecords:2}"
+            }
+      operationId: get-department
+      description: |
+        Get list department
+    post:
+      summary: POST
+      operationId: post-department
+      responses:
+        '200':
+          description: |-
+            {
+             "status":200,
+             "message":"Success"
+            }
+      description: Create department
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                POS:
+                  type: string
+        description: ''
+    put:
+      summary: PUT
+      operationId: put-department
+      responses:
+        '200':
+          description: |-
+            {
+             "status":200,
+             "message":"Success"
+            }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+        description: ''
+    delete:
+      summary: DELETE
+      operationId: delete-department
+      responses:
+        '200':
+          description: OK
+      description: ''
+    parameters:
+      - schema:
+          type: string
+        name: departmentId
+        in: path
+components:
+  schemas:
+    Department:
+      title: Department
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+  securitySchemes:
+    Bearer accessToken:
+      type: http
+      scheme: bearer

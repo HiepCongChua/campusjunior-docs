@@ -1,0 +1,177 @@
+openapi: 3.0.0
+info:
+  title: News of school
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'http://dev-api.campusjunior.com'
+paths:
+  /news:
+    get:
+      summary: Get all news of school
+      tags:
+        - news
+      responses:
+        '200':
+          description: Array of list news
+          content:
+            application/json:
+              schema:
+                $ref: ./models/school-news.v1.yaml
+      operationId: get-news
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: limit
+        - schema:
+            type: string
+          in: query
+          name: page
+        - schema:
+            type: string
+          in: query
+          name: status
+        - schema:
+            type: string
+          in: query
+          name: tags
+    post:
+      summary: ''
+      operationId: post-news
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./campus-junior/models/school-news.v1.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/school-news.v1.yaml
+      tags:
+        - news
+  '/news/{newId}':
+    parameters:
+      - schema:
+          type: string
+        name: newId
+        in: path
+        required: true
+    get:
+      summary: Get a specific new
+      tags:
+        - news
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/school-news.v1.yaml
+      operationId: get-news-newId
+    put:
+      summary: ''
+      operationId: put-news-newId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/school-news.v1.yaml
+      tags:
+        - news
+    delete:
+      summary: ''
+      operationId: delete-news-newId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./common/successMess.v1.yaml
+      tags:
+        - news
+  '/news/{newId}/comments':
+    get:
+      summary: Get comments of a new
+      tags:
+        - new-comments
+      responses:
+        '200':
+          description: Array list of comment
+          content:
+            application/json:
+              schema:
+                $ref: ./campus-junior/models/new-comments.v1.yaml
+      operationId: get-news-comments
+      parameters:
+        - schema:
+            type: string
+            default: '1'
+          in: query
+          name: page
+        - schema:
+            type: string
+            default: '5'
+          in: query
+          name: limit
+  '/news/{newId}/comments/{commentId}':
+    parameters:
+      - schema:
+          type: string
+        name: commentId
+        in: path
+        required: true
+    get:
+      summary: Get a specific comment of a new
+      tags:
+        - new-comments
+      responses: {}
+      operationId: get-news-comments-commentId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./campus-junior/models/new-comments.v1.yaml
+    delete:
+      summary: ''
+      operationId: delete-news-comments-commentId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./common/successMess.v1.yaml
+      tags:
+        - new-comments
+  /news/comments:
+    post:
+      summary: Create a comment
+      operationId: post-new-comment
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./campus-junior/models/new-comments.v1.yaml
+      tags:
+        - new-comments
+components:
+  schemas:
+    News:
+      $ref: ./models/school-news.v1.yaml
+  securitySchemes:
+    Bearer accessToken:
+      type: http
+      scheme: bearer
+security:
+  - Bearer accessToken: []
