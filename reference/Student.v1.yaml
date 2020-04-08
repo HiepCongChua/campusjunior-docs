@@ -118,7 +118,7 @@ paths:
                     data: {}
             application/xml:
               schema:
-                $ref: ../common/error.v1.yaml
+                $ref: ./common/error.v1.yaml
               examples: {}
       operationId: get-students-studentId
       description: ''
@@ -157,7 +157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../common/error.v1.yaml
+                $ref: ./common/error.v1.yaml
       tags:
         - students
     delete:
@@ -169,7 +169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../common/successMess.v1.yaml
+                $ref: ./common/successMess.v1.yaml
         '400':
           description: Bad Request
           content:
@@ -188,7 +188,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/message.v1.yaml
+                $ref: ./campus-junior/models/message.v1.yaml
       requestBody:
         content:
           application/json:
@@ -233,7 +233,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/message.v1.yaml
+                $ref: ./campus-junior/models/message.v1.yaml
       description: Notify to a student
       requestBody:
         content:
