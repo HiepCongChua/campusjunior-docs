@@ -49,3 +49,11 @@ properties:
       - draf
       - pending
       - published
+  level:
+    type: string
+    description: 'l: class, 2: school, 3: city, 4 nation'
+    enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'

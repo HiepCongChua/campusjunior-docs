@@ -17,7 +17,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/students.v1.yaml
+                $ref: ./campus-junior/models/students.v1.yaml
               examples:
                 reponse:
                   value:

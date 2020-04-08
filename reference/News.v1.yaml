@@ -37,8 +37,12 @@ paths:
             type: string
           in: query
           name: tags
+        - schema:
+            type: string
+          in: query
+          name: level
     post:
-      summary: ''
+      summary: Create news
       operationId: post-news
       responses:
         '200':
@@ -51,7 +55,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./models/school-news.v1.yaml
+              $ref: ./campus-junior/models/school-news.v1.yaml
+          application/xml:
+            schema:
+              $ref: ./campus-junior/models/school-news.v1.yaml
+        description: ''
       tags:
         - news
   '/news/{newId}':
