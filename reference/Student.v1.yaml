@@ -59,7 +59,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./models/students.v1.yaml
+              $ref: ./campus-junior/models/students.v1.yaml
     post:
       summary: ''
       operationId: post-students
@@ -69,7 +69,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/students.v1.yaml
+                $ref: ./campus-junior/models/students.v1.yaml
               examples:
                 res:
                   value:
@@ -79,7 +79,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./models/students.v1.yaml
+              $ref: ./campus-junior/models/students.v1.yaml
       tags:
         - students
   '/students/{studentId}':
@@ -110,7 +110,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/students.v1.yaml
+                $ref: ./campus-junior/models/students.v1.yaml
               examples:
                 example-1:
                   value:
@@ -175,7 +175,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../common/error.v1.yaml
+                $ref: ./common/error.v1.yaml
       tags:
         - students
   /notifs/students:
